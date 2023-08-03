@@ -18,3 +18,4 @@ async def test(message: Message):
                            start_parameter='example',
                            payload='some_invoice',
                            )
+

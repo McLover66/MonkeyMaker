@@ -4,7 +4,7 @@ buttons_start = [
     InlineKeyboardButton("Варианты", callback_data="Variants"),
     InlineKeyboardButton("Поддержка", callback_data="Support"),
     InlineKeyboardButton("Хочу в команду", callback_data="Team"),
-    InlineKeyboardButton("a", callback_data="button4"),
+    InlineKeyboardButton("Скопировать @ссылку для друзей", callback_data="LINK"),
     InlineKeyboardButton("b", callback_data="button5"),
     InlineKeyboardButton("c", callback_data="button6"),
 ]
@@ -13,6 +13,7 @@ buttons_Variants = [
     InlineKeyboardButton("Тест", callback_data="Test"),
     InlineKeyboardButton("Контрольная", callback_data="CourceTest"),
     InlineKeyboardButton("Домашнее задание", callback_data="HW"),
+    InlineKeyboardButton("Назад", callback_data="back")
 ]
 
 buttons_Support = [
