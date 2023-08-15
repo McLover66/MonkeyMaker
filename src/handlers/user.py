@@ -20,31 +20,38 @@ async def show_inline_keyboard(message: Message):
 async def on_main_keyboard_button_clicked(callback_query: CallbackQuery):
     if callback_query.data == "Variants":
         # await callback_query.message.answer("Выберите вариант услуги:", reply_markup=keyboard_Variants)
-        await callback_query.message.edit_text("Выберите вариант услуги:", reply_markup=keyboard_Variants)
+        await callback_query.message.edit_text("Заполните данные поля:", reply_markup=keyboard_Variants)
     if callback_query.data == "LINK":
-        await callback_query.message.answer(text=bot_link, disable_web_page_preview=True)
+        await callback_query.message.answer(text=Config.bot_link, disable_web_page_preview=True)
     elif callback_query.data == "Support":
         await callback_query.message.answer("Какой тип поддержки вам нужен:", reply_markup=keyboard_Support)
 
 
 # Обработчик события для нажатия на кнопки в клавиатуре "Варианты"
-@dp.callback_query_handler(text=["CourceTest", "Hw", "back", "Test"])
-async def on_variants_keyboard_button_clicked(callback_query: CallbackQuery):
-    if callback_query.data == "CourceTest":
-        await callback_query.message.answer(f"Вы нажали кнопку '{callback_query.data}'.")
-    if callback_query.data == "Hw":
-        await callback_query.message.answer(f"Вы нажали кнопку '{callback_query.data}'.")
-    if callback_query.data == "Test":
-        await callback_query.message.answer(f"Вы нажали кнопку '{callback_query.data}'.")
-    if callback_query.data == "back":
-        await callback_query.message.edit_text("Выберите опцию:", reply_markup=keyboard_start)
+    # @dp.callback_query_handler(text=["CourceTest", "Hw", "back", "Test"])
+    # async def on_variants_keyboard_button_clicked(callback_query: CallbackQuery):
+    #     if callback_query.data == "CourceTest":
+    #         await callback_query.message.answer(f"Вы нажали кнопку '{callback_query.data}'.")
+    #     if callback_query.data == "Hw":
+    #         await callback_query.message.answer(f"Вы нажали кнопку '{callback_query.data}'.")
+    #     if callback_query.data == "Test":
+    #         await callback_query.message.answer(f"Вы нажали кнопку '{callback_query.data}'.")
+    #     if callback_query.data == "back":
+    #         await callback_query.message.edit_text("Выберите опцию:", reply_markup=keyboard_start)
+
+
+
 
 
 # Обработчик события для нажатия на кнопки в клавиатуре "Поддержка"
-@dp.callback_query_handler(text=["CallSupport", "TellSupport"])
+@dp.callback_query_handler(text=["CallSupport", "TellSupport", "back"])
 async def on_support_keyboard_button_clicked(callback_query: CallbackQuery):
-    await callback_query.message.answer(f"Вы нажали кнопку '{callback_query.data}'.")
-
+    if callback_query.data == "CallSupport":
+        await callback_query.message.answer(f"Вы нажали кнопку '{callback_query.data}'.")
+    if callback_query.data == "TellSupport":
+        await callback_query.message.answer(f"Вы нажали кнопку '{callback_query.data}'.")
+    if callback_query.data == "back":
+        await callback_query.message.edit_text("Выберите опцию:", reply_markup=keyboard_start)
 
 @dp.callback_query_handler(text="Test")
 async def on_test_button_clicked(callback_query: CallbackQuery):
