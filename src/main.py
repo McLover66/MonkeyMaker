@@ -1,10 +1,12 @@
 from aiogram import Bot, Dispatcher
 from src.config import Config
+from src.services.sql import create_database
 import asyncio
+
 
 bot = Bot(token=Config.token)
 dp = Dispatcher(bot=bot)
-
+create_database()
 
 async def main():
     from handlers import dp

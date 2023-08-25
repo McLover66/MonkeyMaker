@@ -1,6 +1,12 @@
+# for sql
+import sqlite3
+from aiogram.dispatcher import FSMContext
+from aiogram.dispatcher.filters.state import StatesGroup, State
+
 from aiogram.types import Message, LabeledPrice
 from src.main import bot
 from src.config import Config
+
 
 price = [LabeledPrice(label='КР', amount=200000)]
 
@@ -18,4 +24,11 @@ async def test(message: Message):
                            start_parameter='example',
                            payload='some_invoice',
                            )
+
+
+
+
+
+
+
 

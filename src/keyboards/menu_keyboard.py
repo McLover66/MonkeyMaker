@@ -1,6 +1,7 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 buttons_start = [
+    InlineKeyboardButton("заполнить данные", callback_data="data"),
     InlineKeyboardButton("Новый заказ", callback_data="new_order"),
     InlineKeyboardButton("Поддержка", callback_data="Support"),
     InlineKeyboardButton("Хочу в команду", callback_data="Team"),

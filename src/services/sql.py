@@ -1,18 +1,24 @@
 import sqlite3
 
-# Подключение к базе данных
-conn = sqlite3.connect('db.db')
-cursor = conn.cursor()
 
-# Создание таблицы, если она еще не создана
-cursor.execute('''
-    CREATE TABLE IF NOT EXISTS user_data (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id INTEGER,
-        university TEXT,
-        course TEXT,
-        service TEXT
-    )
-''')
-conn.commit()
+# Создаем базу данных
+def create_database():
+    conn = sqlite3.connect('db.db')
+    cursor = conn.cursor()
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS clients (
+            id INTEGER PRIMARY KEY,
+            name TEXT,
+            age INTEGER,
+            email TEXT
+        )
+    ''')
+
+    conn.commit()
+    conn.close()
+
+
+create_database()
+
 
