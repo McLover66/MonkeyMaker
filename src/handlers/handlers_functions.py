@@ -2,6 +2,9 @@
 import sqlite3
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import StatesGroup, State
+from aiogram import Bot, Dispatcher, types
+
+
 
 from aiogram.types import Message, LabeledPrice
 from src.main import bot
@@ -26,9 +29,27 @@ async def test(message: Message):
                            )
 
 
+async def process_data_name(message: types.Message):
+    user_message = message.text
 
+    data = user_message.split("\n")
 
+    if len(data) != 5:
+        await message.answer("Пожалуйста, введите данные корректно (со сносом строки): \n имя(петя) \n фамилия(петров) \n возраст(20) \n университет(мгу) \n факультет(физика)")
+        return
 
+    name, lastname, age, university, faculty = data
 
+    conn = sqlite3.connect('db.db')
+    cursor = conn.cursor()
 
+    cursor.execute('''
+        INSERT INTO clients (name, lastname, age, university, faculty)
+        VALUES (?, ?, ?, ?, ?)
+    ''', (name, lastname, age, university, faculty))
 
+    conn.commit()
+    print("Data committed to the database.")
+    conn.close()
+
+    await message.answer("Данные успешно сохранены!")

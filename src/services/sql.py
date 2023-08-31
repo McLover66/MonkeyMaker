@@ -10,8 +10,10 @@ def create_database():
         CREATE TABLE IF NOT EXISTS clients (
             id INTEGER PRIMARY KEY,
             name TEXT,
+            lastname TEXT,
             age INTEGER,
-            email TEXT
+            university TEXT, 
+            faculty TEXT
         )
     ''')
 

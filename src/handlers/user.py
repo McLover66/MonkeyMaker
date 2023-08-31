@@ -16,6 +16,7 @@ from src.keyboards.menu_keyboard import keyboard_Variants
 from src.keyboards.menu_keyboard import keyboard_Support
 
 from src.handlers.handlers_functions import test
+from src.handlers.handlers_functions import process_data_name
 
 
 @dp.message_handler(commands=['start'])
@@ -44,8 +45,10 @@ async def on_variants_keyboard_button_clicked(callback_query: CallbackQuery):
         await callback_query.message.answer(f"Вы нажали кнопку '{callback_query.data}'.")
     if callback_query.data == "Hw":
         await callback_query.message.answer(f"Вы нажали кнопку '{callback_query.data}'.")
+
     if callback_query.data == "Test":
-        await test(callback_query.message)
+        await test(callback_query.message) # применяем функцию
+
     if callback_query.data == "back":
         await callback_query.message.edit_text("Выберите опцию:", reply_markup=keyboard_start)
 
@@ -77,31 +80,11 @@ async def sucessful_payment(message, Message):
 # обрабоотчик кнопки ввести данные
 @dp.message_handler(lambda message: message.text == "Ввести данные")
 async def enter_data(message: types.Message):
-    await message.answer("Введите данные построчно: имя, возраст, email")
+    await message.answer("Введите данные построчно с маленькой буквы со сносом: "
+                         "\n имя(петя) "
+                         "\n фамилия(петров) "
+                         "\n возраст(20) "
+                         "\n университет(мгу) "
+                         "\n факультет(физика)")
     dp.register_message_handler(process_data_name)
-
-async def process_data_name(message: types.Message):
-    user_message = message.text
-
-    data = user_message.split("\n")
-
-    if len(data) != 3:
-        await message.answer("Пожалуйста, введите данные построчно: имя, возраст, email")
-        return
-
-    name, age, email = data
-
-    conn = sqlite3.connect('db.db')
-    cursor = conn.cursor()
-
-    cursor.execute('''
-        INSERT INTO clients (name, age, email)
-        VALUES (?, ?, ?)
-    ''', (name, age, email))
-
-    conn.commit()
-    print("Data committed to the database.")
-    conn.close()
-
-    await message.answer("Данные успешно сохранены!")
 
